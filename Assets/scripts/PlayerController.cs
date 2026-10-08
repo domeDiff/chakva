@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float lookSpeed = 2f;
     [SerializeField] private Transform playerCamera;
+    [SerializeField] private float gravity = -20f;
 
+
+    private float verticalVelocity;
     private CharacterController controller;
     private PlayerInputActions inputActions;
-
     private float cameraRotationX;
 
     private void Awake()
@@ -39,6 +41,15 @@ public class PlayerController : MonoBehaviour
         Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
 
         Vector3 movement = transform.right * input.x + transform.forward * input.y;
+
+        if (controller.isGrounded)
+        {
+            verticalVelocity = -2f;
+        }
+
+        verticalVelocity += gravity * Time.deltaTime;
+
+        movement.y = verticalVelocity;
 
         controller.Move(moveSpeed * Time.deltaTime * movement);
     }
