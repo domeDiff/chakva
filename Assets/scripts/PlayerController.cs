@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float lookSpeed = 2f;
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float gravity = -20f;
+    [SerializeField] private Light flashlight;
 
 
     private float verticalVelocity;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Look();
+        FlashLightToggle();
     }
 
     private void Move()
@@ -67,5 +69,13 @@ public class PlayerController : MonoBehaviour
         cameraRotationX = Mathf.Clamp(cameraRotationX, -80f, 80f);
 
         playerCamera.localRotation = Quaternion.Euler(cameraRotationX, 0f, 0f);
+    }
+
+    private void FlashLightToggle()
+    {
+        if (inputActions.Player.Flashlight.WasCompletedThisFrame())
+        {
+            flashlight.enabled = !flashlight.enabled;
+        }
     }
 }

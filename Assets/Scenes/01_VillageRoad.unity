@@ -709,6 +709,7 @@ MonoBehaviour:
   lookSpeed: 2
   playerCamera: {fileID: 225984551}
   gravity: -20
+  flashlight: {fileID: 1969983165}
 --- !u!1 &1668526817
 GameObject:
   m_ObjectHideFlags: 0
