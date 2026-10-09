@@ -8,8 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float gravity = -20f;
     [SerializeField] private Light flashlight;
+    [SerializeField] private float standingHeight = 2f;
+    [SerializeField] private float crouchingHeight = 1.2f;
 
 
+
+    private bool isCrouching;
     private float verticalVelocity;
     private CharacterController controller;
     private PlayerInputActions inputActions;
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Look();
         FlashLightToggle();
+        Crouch();
     }
 
     private void Move()
@@ -76,6 +81,21 @@ public class PlayerController : MonoBehaviour
         if (inputActions.Player.Flashlight.WasCompletedThisFrame())
         {
             flashlight.enabled = !flashlight.enabled;
+        }
+    }
+
+    private void Crouch()
+    {
+        if (inputActions.Player.Crouch.IsPressed())
+        {
+            isCrouching = true;
+            controller.height = crouchingHeight;
+        }
+
+        else
+        {
+            isCrouching = false;
+            controller.height = standingHeight;
         }
     }
 }
