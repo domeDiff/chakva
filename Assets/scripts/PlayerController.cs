@@ -4,7 +4,12 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 8f;
+    private float currentSpeed;
+
+
     [SerializeField] private float lookSpeed = 2f;
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float gravity = -20f;
@@ -15,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchingHeight = 1.2f;
     [SerializeField] private float standingCameraHeight = 0.8f;
     [SerializeField] private float crouchingCameraHeight = 0.45f;
+    [SerializeField] private float crouchingCenterY = 0.6f;
     [SerializeField] private float crouchSpeed = 8f;
     private bool isCrouching;
 
@@ -50,6 +56,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        currentSpeed = inputActions.Player.Sprint.IsPressed() && !isCrouching ? sprintSpeed : moveSpeed;
+
         Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
 
         Vector3 movement = transform.right * input.x + transform.forward * input.y;
@@ -63,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
         movement.y = verticalVelocity;
 
-        controller.Move(moveSpeed * Time.deltaTime * movement);
+        controller.Move(currentSpeed * Time.deltaTime * movement);
     }
 
     private void Look()
@@ -95,12 +103,14 @@ public class PlayerController : MonoBehaviour
         {
             isCrouching = true;
             controller.height = crouchingHeight;
+            controller.center = new Vector3(0f, crouchingCenterY, 0f);
         }
 
         else
         {
             isCrouching = false;
             controller.height = standingHeight;
+            controller.center = new Vector3(0f, standingHeight / 2f, 0f);
         }
     }
 
