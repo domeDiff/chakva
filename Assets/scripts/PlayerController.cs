@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float gravity = -20f;
     [SerializeField] private Light flashlight;
+
+    [Header("Crouch")]
     [SerializeField] private float standingHeight = 2f;
     [SerializeField] private float crouchingHeight = 1.2f;
-
-
-
+    [SerializeField] private float standingCameraHeight = 0.8f;
+    [SerializeField] private float crouchingCameraHeight = 0.45f;
+    [SerializeField] private float crouchSpeed = 8f;
     private bool isCrouching;
+
     private float verticalVelocity;
     private CharacterController controller;
     private PlayerInputActions inputActions;
@@ -41,6 +45,7 @@ public class PlayerController : MonoBehaviour
         Look();
         FlashLightToggle();
         Crouch();
+        CrouchCamera();
     }
 
     private void Move()
@@ -78,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void FlashLightToggle()
     {
-        if (inputActions.Player.Flashlight.WasCompletedThisFrame())
+        if (inputActions.Player.Flashlight.WasPressedThisFrame())
         {
             flashlight.enabled = !flashlight.enabled;
         }
@@ -97,5 +102,22 @@ public class PlayerController : MonoBehaviour
             isCrouching = false;
             controller.height = standingHeight;
         }
+    }
+
+    private void CrouchCamera()
+    {
+        float targetHeight;
+
+        if (isCrouching)
+            targetHeight = crouchingCameraHeight;
+
+        else
+            targetHeight = standingCameraHeight;
+
+        Vector3 cameraPosition = playerCamera.localPosition;
+
+        cameraPosition.y = Mathf.Lerp(cameraPosition.y, targetHeight, crouchSpeed * Time.deltaTime);
+
+        playerCamera.localPosition = cameraPosition;
     }
 }
