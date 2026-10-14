@@ -1,10 +1,14 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private Transform playerCamera;
     [SerializeField] private float interactRange = 3f;
+    [SerializeField] private TMP_Text interactionPrompt;
 
+
+    private InteractableObject currentInteractable;
     private PlayerInputActions inputActions;
 
     private void Awake()
@@ -24,24 +28,25 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Update()
     {
-        if (inputActions.Player.Interact.WasPressedThisFrame())
+        CheckForInteractable();
+
+        if (currentInteractable!= null && inputActions.Player.Interact.WasPressedThisFrame())
         {
-            Interact();
+            currentInteractable.Interact();
         }
     }
 
-    private void Interact()
+    private void CheckForInteractable()
     {
+        currentInteractable = null;
+
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
 
         if(Physics.Raycast(ray, out RaycastHit hit, interactRange))
         {
-            InteractableObject interactable = hit.collider.GetComponent<InteractableObject>();
+            currentInteractable = hit.collider.GetComponent<InteractableObject>();
 
-            if(interactable != null)
-            {
-                interactable.Interact();
-            }
+            interactionPrompt.gameObject.SetActive(currentInteractable != null);
         }
     }
 }
