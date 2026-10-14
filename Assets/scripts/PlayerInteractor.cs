@@ -33,6 +33,13 @@ public class PlayerInteractor : MonoBehaviour
         if (currentInteractable!= null && inputActions.Player.Interact.WasPressedThisFrame())
         {
             currentInteractable.Interact();
+
+            DoorInteractable door = currentInteractable.GetComponent<DoorInteractable>();
+
+            if(door != null)
+            {
+                door.Interact();
+            }
         }
     }
 
@@ -45,7 +52,10 @@ public class PlayerInteractor : MonoBehaviour
         if(Physics.Raycast(ray, out RaycastHit hit, interactRange))
         {
             currentInteractable = hit.collider.GetComponent<InteractableObject>();
+        }
 
+        if(interactionPrompt != null)
+        {
             interactionPrompt.gameObject.SetActive(currentInteractable != null);
         }
     }

@@ -578,6 +578,8 @@ GameObject:
   - component: {fileID: 505981927}
   - component: {fileID: 505981926}
   - component: {fileID: 505981925}
+  - component: {fileID: 505981928}
+  - component: {fileID: 505981929}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -678,6 +680,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505981923}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &505981928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505981923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0374938a5dcf35844ba40a93d85ad814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorInteractable
+  openAngle: 90
+  openSpeed: 2
+--- !u!114 &505981929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505981923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18faecc65e35e748a836ff5bc680852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  objectName: door
+  interactionMessage: door open dumbass
 --- !u!1 &900706636
 GameObject:
   m_ObjectHideFlags: 0
