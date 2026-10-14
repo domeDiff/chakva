@@ -579,7 +579,6 @@ GameObject:
   - component: {fileID: 505981926}
   - component: {fileID: 505981925}
   - component: {fileID: 505981928}
-  - component: {fileID: 505981929}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -595,12 +594,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505981923}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.986, z: 5.8}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.46898997, y: 0.05267006, z: 0.10000038}
   m_LocalScale: {x: 1, y: 2, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1668526818}
+  m_Father: {fileID: 1174771479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &505981925
 BoxCollider:
@@ -689,25 +688,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 505981923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0374938a5dcf35844ba40a93d85ad814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoorInteractable
-  openAngle: 90
-  openSpeed: 2
---- !u!114 &505981929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505981923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b18faecc65e35e748a836ff5bc680852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
   objectName: door
-  interactionMessage: door open dumbass
+  interactionMessage: close it man its cold
 --- !u!1 &900706636
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +806,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1668526818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1174771478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1174771479}
+  - component: {fileID: 1174771480}
+  m_Layer: 0
+  m_Name: doorHinge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1174771479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174771478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.864, y: 0.94333, z: 5.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 505981924}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1174771480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174771478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0374938a5dcf35844ba40a93d85ad814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorInteractable
+  door: {fileID: 505981924}
+  openAngle: 90
+  openSpeed: 2
 --- !u!1 &1402623521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1366,6 @@ Transform:
   m_Children:
   - {fileID: 900706640}
   - {fileID: 1966372547}
-  - {fileID: 505981924}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1847198243
@@ -1855,3 +1887,4 @@ SceneRoots:
   - {fileID: 1553468827}
   - {fileID: 274104236}
   - {fileID: 279027031}
+  - {fileID: 1174771479}
