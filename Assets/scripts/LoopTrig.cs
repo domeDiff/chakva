@@ -3,6 +3,7 @@ using UnityEngine;
 public class LoopTrig : MonoBehaviour
 {
     [SerializeField] private Transform loopStartPoint;
+    [SerializeField] private AudioSource loopSound;
 
     private int loopCount;
     private void OnTriggerEnter(Collider other)
@@ -21,6 +22,9 @@ public class LoopTrig : MonoBehaviour
             controller.enabled = true;
 
         loopCount++;
+
+        if (loopSound != null)
+            loopSound.Play();
 
         Debug.Log("Chakva: loop " + loopCount);
     }
