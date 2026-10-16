@@ -2,29 +2,49 @@ using UnityEngine;
 
 public class LoopTrig : MonoBehaviour
 {
-    [SerializeField] private Transform player;
     [SerializeField] private Transform loopStartPoint;
-    private bool hasTriggered;
+    [SerializeField] private AudioSource loopSound;
+
+    private int loopCount;
     private void OnTriggerEnter(Collider other)
     {
-        if (hasTriggered)
+        if (!other.CompareTag("Player"))
             return;
 
-        if (other.CompareTag("Player"))
+        CharacterController controller = other.GetComponent<CharacterController>();
+
+        if (controller != null)
+            controller.enabled = false;
+
+        other.transform.position = loopStartPoint.position;
+
+        if (controller != null)
+            controller.enabled = true;
+
+        loopCount++;
+
+        if (loopSound != null)
+            loopSound.Play();
+
+        switch (loopCount)
         {
-            hasTriggered = true;
+            case 1:
+                Debug.Log("CHAKVA: The forest has looped.");
+                break;
 
-            CharacterController controller = other.GetComponent<CharacterController>();
+            case 2:
+                Debug.Log("CHAKVA: The forest feels familiar.");
+                break;
 
-            if(controller != null)
-                controller.enabled = false;
+            case 3:
+                Debug.Log("CHAKVA: Something is following Ishita.");
+                break;
 
-            player.position = loopStartPoint.position;
-
-            if (controller != null)
-                controller.enabled = true;
-
-            Debug.Log("CHAKVA: ISHITA IS TRAPPED");
+            default:
+                Debug.Log("CHAKVA: The forest refuses to let Ishita leave.");
+                break;
         }
+
+        Debug.Log("Chakva: loop " + loopCount);
     }
 }
