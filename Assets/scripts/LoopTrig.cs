@@ -2,29 +2,26 @@ using UnityEngine;
 
 public class LoopTrig : MonoBehaviour
 {
-    [SerializeField] private Transform player;
     [SerializeField] private Transform loopStartPoint;
-    private bool hasTriggered;
+
+    private int loopCount;
     private void OnTriggerEnter(Collider other)
     {
-        if (hasTriggered)
+        if (!other.CompareTag("Player"))
             return;
 
-        if (other.CompareTag("Player"))
-        {
-            hasTriggered = true;
+        CharacterController controller = other.GetComponent<CharacterController>();
 
-            CharacterController controller = other.GetComponent<CharacterController>();
+        if (controller != null)
+            controller.enabled = false;
 
-            if(controller != null)
-                controller.enabled = false;
+        other.transform.position = loopStartPoint.position;
 
-            player.position = loopStartPoint.position;
+        if (controller != null)
+            controller.enabled = true;
 
-            if (controller != null)
-                controller.enabled = true;
+        loopCount++;
 
-            Debug.Log("CHAKVA: ISHITA IS TRAPPED");
-        }
+        Debug.Log("Chakva: loop " + loopCount);
     }
 }
