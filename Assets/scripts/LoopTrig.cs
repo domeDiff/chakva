@@ -5,6 +5,7 @@ public class LoopTrig : MonoBehaviour
     [SerializeField] private Transform loopStartPoint;
     [SerializeField] private AudioSource loopSound;
 
+    [SerializeField] private GameObject chudailPlaceholder;
     private int loopCount;
     private void OnTriggerEnter(Collider other)
     {
@@ -38,6 +39,9 @@ public class LoopTrig : MonoBehaviour
 
             case 3:
                 Debug.Log("CHAKVA: Something is following Ishita.");
+
+                if (chudailPlaceholder != null)
+                    chudailPlaceholder.SetActive(true);
                 break;
 
             default:
